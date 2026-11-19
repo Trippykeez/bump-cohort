@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Bump.fm Launch Cohort</title>
+<meta name="description" content="Three quick steps to join the Bump.fm launch cohort.">
+<style>
+:root{--bg:#0c0b10;--card:#16151c;--card2:#1d1c25;--line:#2c2a36;--fg:#f4f2fa;--muted:#a19dae;--accent:#8b6cff;--accent2:#f2e85c;--ok:#4ade80;--bad:#ff7b6b;--r:16px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:20px 16px 64px}
+.brand{display:flex;align-items:center;gap:0;font-weight:800;letter-spacing:.02em;font-size:20px;margin:4px 0 22px}
+.brand b{color:var(--accent2)}
+.brand small{font-weight:600;color:var(--muted);font-size:13px;letter-spacing:0;margin-left:auto}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 18px}
+.progress{display:flex;gap:6px;margin:0 0 20px}
+.progress i{flex:1;height:6px;border-radius:6px;background:var(--line)}
+.progress i.on{background:var(--ok)}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin:0 0 12px;overflow:hidden}
+.step-head{display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;width:100%;background:none;border:0;color:inherit;font:inherit;text-align:left}
+.num{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--card2);border:1px solid var(--line)}
+.step.done .num{background:var(--ok);border-color:var(--ok);color:#06210f}
+.step.open .num{background:var(--accent);border-color:var(--accent);color:#fff}
+.step-title{font-weight:700;font-size:17px}
+.step-note{color:var(--muted);font-size:14px}
+.chev{margin-left:auto;color:var(--muted);transition:transform .2s}
+.step.open .chev{transform:rotate(90deg)}
+.step-body{padding:0 16px 18px;display:none}
+.step.open .step-body{display:block}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:12px;border:0;background:var(--accent);color:#fff;font:inherit;font-weight:700;font-size:17px;cursor:pointer;text-decoration:none;margin-top:12px}
+.btn.alt{background:var(--card2);border:1px solid var(--line);color:var(--fg)}
+.btn.yellow{background:var(--accent2);color:#14130a}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.emailbox{display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0 0;word-break:break-all}
+.emailbox span{flex:1;font-weight:600}
+.copy{flex:none;background:none;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 10px;font:inherit;font-size:14px;cursor:pointer}
+ul.sum{margin:8px 0 0;padding-left:20px}
+ul.sum li{margin:4px 0}
+details{margin:12px 0 0;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+details summary{cursor:pointer;font-weight:600}
+details .terms{font-size:14px;color:#d8d5e2;max-height:320px;overflow:auto;margin-top:8px}
+label{display:block;font-weight:600;margin:16px 0 6px}
+label .opt{color:var(--muted);font-weight:500}
+input[type=text],input[type=email],input[type=url],textarea{width:100%;font:inherit;font-size:17px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 14px;outline:none}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:76px;resize:vertical}
+.choice{display:flex;gap:8px}
+.choice button{flex:1;min-height:48px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-weight:600;cursor:pointer}
+.choice button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.check{display:flex;gap:12px;align-items:flex-start;margin:18px 0 0;font-weight:500;cursor:pointer}
+.check input{width:24px;height:24px;flex:none;margin:0;accent-color:var(--accent)}
+.sigprev{font-family:"Snell Roundhand","Brush Script MT","Segoe Script",cursive;font-size:30px;min-height:44px;color:var(--accent2);margin-top:6px}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 0}
+.err{color:var(--bad);font-size:15px;margin:10px 0 0;min-height:1px}
+.ok{color:var(--ok);font-weight:600}
+.tabs{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:4px;margin-top:6px}
+.tabs button{flex:1;min-height:42px;border:0;border-radius:9px;background:none;color:var(--muted);font:inherit;font-weight:700;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--card2);color:var(--fg)}
+.drop{display:block;border:2px dashed var(--line);border-radius:14px;padding:26px 14px;text-align:center;margin-top:14px;cursor:pointer;color:var(--muted)}
+.drop strong{display:block;color:var(--fg);font-size:17px;margin-bottom:4px}
+.drop.has{border-style:solid;border-color:var(--accent);color:var(--fg)}
+.drop input{display:none}
+.bar{height:10px;background:var(--line);border-radius:10px;overflow:hidden;margin-top:12px;display:none}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.center{text-align:center}
+.big{font-size:54px;line-height:1;margin:8px 0}
+.foot{color:var(--muted);font-size:13px;text-align:center;margin-top:28px}
+.foot a{color:var(--muted)}
+.hidden{display:none!important}
+.spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:s 1s linear infinite;margin:40px auto}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">BUMP<b>.fm</b><small>Launch cohort</small></div>
+
+  <div id="loading"><div class="spin"></div></div>
+
+  <div id="nolink" class="hidden">
+    <h1>Hi there</h1>
+    <p class="sub">This page works with the personal link from your Bump.fm email. Open that email and tap the button in it.</p>
+    <p class="sub">Can't find it? Email <a href="mailto:alex@bump.fm" style="color:var(--accent2)">alex@bump.fm</a> and we'll send a new one.</p>
+  </div>
+
+  <div id="app" class="hidden">
+    <h1 id="hello">Hi</h1>
+    <p class="sub" id="lead">Three quick steps and you're in the launch cohort. Takes about 3 minutes.</p>
+    <div class="progress" aria-hidden="true"><i id="p1"></i><i id="p2"></i><i id="p3"></i></div>
+
+    <!-- STEP 1 -->
+    <section class="step" id="s1">
+      <button class="step-head" type="button" data-step="1">
+        <span class="num">1</span>
+        <span><span class="step-title">Make or sign in to your Bump account</span><br><span class="step-note" id="s1note">New or already on Bump, either works</span></span>
+        <span class="chev">&#9654;</span>
+      </button>
+      <div class="step-body">
+        <p style="margin:0"><b>New to Bump?</b> Make an account. <b>Already have one?</b> Just sign in. Either way, use <b>this email</b> so we can match it to you:</p>
+        <div class="emailbox"><span id="emailShow"></span><button class="copy" type="button" id="copyEmail">Copy</button></div>
+        <a class="btn" id="openBump" href="https://bump.fm" target="_blank" rel="noopener">Open Bump.fm to sign up or sign in</a>
+        <button class="btn alt" type="button" id="doneSignup">Done, I'm signed in</button>
+        <p class="hint">Signed up with a different email before? Sign in with that one and email alex@bump.fm so we can link it. We double-check on our side within a day.</p>
+        <p class="err" id="e1"></p>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" id="s2">
+      <button class="step-head" type="button" data-step="2">
+        <span class="num">2</span>
+        <span><span class="step-title">Sign the consent form</span><br><span class="step-note" id="s2note">Lets Bump show your name and photo</span></span>
+        <span class="chev">&#9654;</span>
+      </button>
+      <div class="step-body">
+        <p style="margin:0"><b>The short version:</b></p>
+        <ul class="sum">
+          <li>Bump can use your name, photos, likeness and bio on Bump and to promote Bump and your tokens.</li>
+          <li>It does <b>not</b> launch any song. You launch tokens yourself in the app, one song at a time.</li>
+          <li>Bump gets <b>no</b> rights to your recordings or songs and <b>no</b> share of your royalties.</li>
+          <li>Token earnings are yours: 1% on every buy and 2% on every sell, paid quarterly.</li>
+          <li>You can end this any time by telling us in writing.</li>
+        </ul>
+        <details><summary>Read the full terms</summary><div class="terms" id="terms"></div></details>
+
+        <form id="consentForm" novalidate>
+          <label for="legalName">Your full legal name</label>
+          <input type="text" id="legalName" autocomplete="name" placeholder="First and last name">
+
+          <label for="artistName">Artist name</label>
+          <input type="text" id="artistName">
+
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email">
+
+          <label for="instagram">Instagram <span class="opt">(optional)</span></label>
+          <input type="text" id="instagram" placeholder="@yourhandle" autocapitalize="off">
+
+          <label>Are you 18 or older?</label>
+          <div class="choice" data-name="adult"><button type="button" data-v="yes" aria-pressed="true">Yes</button><button type="button" data-v="no" aria-pressed="false">No</button></div>
+          <div id="guardianBox" class="hidden">
+            <label for="guardianName">Parent or guardian's full name</label>
+            <input type="text" id="guardianName">
+            <p class="hint">Since you're under 18, a parent or guardian needs to sign with you. Have them type their name here.</p>
+          </div>
+
+          <label>Does a label, manager or brand deal control how your name or image is used?</label>
+          <div class="choice" data-name="nil"><button type="button" data-v="no" aria-pressed="true">No</button><button type="button" data-v="yes" aria-pressed="false">Yes</button></div>
+          <div id="nilBox" class="hidden">
+            <label for="nilDetail">Who with?</label>
+            <input type="text" id="nilDetail" placeholder="Label, manager or brand name">
+          </div>
+
+          <label for="songsListed">Songs you might launch <span class="opt">(optional, one per line)</span></label>
+          <textarea id="songsListed" placeholder="Song title"></textarea>
+
+          <label class="check"><input type="checkbox" id="agree"> <span>I have read and agree to the terms.</span></label>
+
+          <label for="signature">Type your full name to sign</label>
+          <input type="text" id="signature" placeholder="Your full legal name">
+          <div class="sigprev" id="sigPrev"></div>
+
+          <button class="btn" type="submit" id="signBtn">Sign</button>
+          <p class="hint">We'll email you a copy.</p>
+          <p class="err" id="e2"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" id="s3">
+      <button class="step-head" type="button" data-step="3">
+        <span class="num">3</span>
+        <span><span class="step-title">Send us a song</span><br><span class="step-note" id="s3note">Upload a file or paste a link</span></span>
+        <span class="chev">&#9654;</span>
+      </button>
+      <div class="step-body">
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true" data-mode="file">Upload a file</button>
+          <button type="button" role="tab" aria-selected="false" data-mode="link">Paste a link</button>
+        </div>
+        <div id="modeFile">
+          <label class="drop" id="drop"><input type="file" id="fileIn" accept="audio/*,.mp3,.wav,.m4a,.aif,.aiff,.flac"><strong id="dropTitle">Tap to choose your song</strong><span id="dropSub">MP3, WAV or M4A, up to 60 MB</span></label>
+        </div>
+        <div id="modeLink" class="hidden">
+          <label for="songLink">Link to your song</label>
+          <input type="url" id="songLink" placeholder="Spotify, SoundCloud, YouTube, Dropbox or Google Drive link" autocapitalize="off">
+        </div>
+        <label for="songTitle">Song title <span class="opt">(optional)</span></label>
+        <input type="text" id="songTitle">
+        <div class="bar" id="bar"><i id="barFill"></i></div>
+        <button class="btn" type="button" id="sendSong">Send song</button>
+        <p class="err" id="e3"></p>
+      </div>
+    </section>
+
+    <div id="allDone" class="hidden center" style="margin-top:24px">
+      <div class="big">&#10003;</div>
+      <h1>You're all set</h1>
+      <p class="sub">Thanks! You've done everything we need. We'll be in touch about your launch.</p>
+    </div>
+  </div>
+
+  <p class="foot">Questions? <a href="mailto:alex@bump.fm">alex@bump.fm</a> · Bump Into Present Inc.</p>
+</div>
+
+<script>
+(function () {
+  var API = 'https://script.google.com/macros/s/AKfycbywd-CfHPF2FYktKZ70eebhcFvuXMJZtN8sO0bb2Ag96P8ojEPGfyN0twe_brmch-0l/exec';
+  var CHUNK = 4 * 1024 * 1024; // must be a multiple of 256 KB
+  var MAX = 60 * 1024 * 1024;
+  var token = (new URLSearchParams(location.search).get('t') || '').replace(/[^A-Za-z0-9]/g, '');
+  var state = { signup: false, consent: false, song: false };
+  var me = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var show = function (el, on) { el.classList.toggle('hidden', !on); };
+
+  var TERMS = [
+    ['1. Name, image and likeness', "Artist grants Bump a non-exclusive, worldwide license to use Artist's name, professional name, approved photos, likeness and approved biography: (a) on Bump, including for tokens of songs Artist launches, such as token pages, names, imagery and trading screens; and (b) to market Bump and those tokens, including the Bump app, app store pages, screenshots and previews, Bump's social channels, launch graphics and announcements. Bump will use only photos and materials Artist provides or approves, and may share them with app stores and service providers only as needed to run and promote Bump. This license doesn't cover merchandise or other brands."],
+    ['2. Launches happen in the app', "Artist launches tokens on Bump, in the app, one song at a time. Bump doesn't launch tokens for Artist. Each launch needs Artist, or a team member Artist authorizes in writing, to accept Bump's launch terms for that song in the app."],
+    ['3. What this does not grant', "No rights in any recording or composition, no streaming or distribution rights, and no share of royalties. Tokens are based on Artist's name, image and likeness only."],
+    ['4. Earnings', "Token earnings for songs Artist launches belong to Artist: 1% on every buy and 2% on every sell of each token, paid quarterly subject to the claims hold, identity verification, a tax form and confirmed payout details. A label shares in them only through its own agreement with Artist."],
+    ['5. Artist confirms', "that Artist is free to grant these rights, and that no label, management, brand or other agreement gives anyone exclusive control of Artist's name, image or likeness that this consent would breach."],
+    ['6. Claiming the profile', "When Artist claims their profile on Bump and accepts the in-app terms, those terms replace this consent for everything going forward."],
+    ['7. Ending this consent', "Artist may end this consent for the future by written notice. Bump will then create no new marketing using Artist's name, image or likeness, and will stop reusing published marketing within 30 days. Tokens already launched keep trading under their existing name and imagery."]
+  ];
+  var termsEl = $('terms');
+  var intro = document.createElement('p'); intro.textContent = 'Launch Cohort Consent Form, version 1.3. This consent is between Bump Into Present Inc. ("Bump") and you ("Artist").'; termsEl.appendChild(intro);
+  TERMS.forEach(function (t) { var p = document.createElement('p'); var b = document.createElement('b'); b.textContent = t[0] + '. '; p.appendChild(b); p.appendChild(document.createTextNode(t[1])); termsEl.appendChild(p); });
+
+  function api(method, payload) {
+    var url = API + (method === 'GET' ? '?' + new URLSearchParams(payload).toString() : '');
+    var opts = method === 'GET' ? {} : { method: 'POST', body: JSON.stringify(payload) }; // text/plain: no preflight
+    return fetch(url, opts).then(function (r) { return r.json(); });
+  }
+
+  function render() {
+    ['signup', 'consent', 'song'].forEach(function (k, i) {
+      var s = $('s' + (i + 1)); s.classList.toggle('done', state[k]);
+      $('p' + (i + 1)).classList.toggle('on', state[k]);
+    });
+    $('s1note').textContent = state.signup ? 'Done, thanks' : 'New or already on Bump, either works';
+    $('s2note').textContent = state.consent ? 'Signed, thanks' : 'Lets Bump show your name and photo';
+    $('s3note').textContent = state.song ? 'Got it, thanks' : 'Upload a file or paste a link';
+    var left = ['signup', 'consent', 'song'].filter(function (k) { return !state[k]; }).length;
+    show($('allDone'), left === 0);
+    $('lead').textContent = left === 0 ? "That's everything. Nice work." : left === 3 ? "Three quick steps and you're in the launch cohort. Takes about 3 minutes." : left + (left === 1 ? ' step' : ' steps') + ' left.';
+  }
+  function openStep(n) {
+    [1, 2, 3].forEach(function (i) { $('s' + i).classList.toggle('open', i === n); });
+    if (n) setTimeout(function () { $('s' + n).scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+  }
+  function nextOpen() {
+    var keys = ['signup', 'consent', 'song'];
+    for (var i = 0; i < 3; i++) if (!state[keys[i]]) return openStep(i + 1);
+    openStep(0);
+  }
+  document.querySelectorAll('.step-head').forEach(function (h) {
+    h.addEventListener('click', function () { var n = +h.dataset.step; openStep($('s' + n).classList.contains('open') ? 0 : n); });
+  });
+
+  // choices
+  var choice = { adult: 'yes', nil: 'no' };
+  document.querySelectorAll('.choice').forEach(function (c) {
+    c.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      choice[c.dataset.name] = b.dataset.v;
+      c.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      show($('guardianBox'), choice.adult === 'no'); show($('nilBox'), choice.nil === 'yes');
+    });
+  });
+  $('signature').addEventListener('input', function () { $('sigPrev').textContent = $('signature').value; });
+  $('legalName').addEventListener('change', function () { if (!$('signature').value) { /* leave for the artist to type */ } });
+
+  $('copyEmail').addEventListener('click', function () {
+    var t = me && me.email; if (!t) return;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { $('copyEmail').textContent = 'Copied'; setTimeout(function () { $('copyEmail').textContent = 'Copy'; }, 1500); }).catch(function () {});
+  });
+
+  // STEP 1
+  $('doneSignup').addEventListener('click', function () {
+    var b = this; b.disabled = true; $('e1').textContent = '';
+    api('POST', { action: 'signup', t: token, ua: navigator.userAgent }).then(function (r) {
+      if (!r.ok) throw r;
+      state.signup = true; render(); nextOpen();
+    }).catch(function () { $('e1').textContent = "That didn't go through. Check your connection and tap again."; }).then(function () { b.disabled = false; });
+  });
+
+  // STEP 2
+  $('consentForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = $('e2'); err.textContent = '';
+    var legal = $('legalName').value.trim(), sig = $('signature').value.trim();
+    if (legal.split(/\s+/).length < 2) return (err.textContent = 'Add your full legal name (first and last).', $('legalName').focus());
+    if (!$('artistName').value.trim()) return (err.textContent = 'Add your artist name.', $('artistName').focus());
+    if (!/^\S+@\S+\.\S+$/.test($('email').value.trim())) return (err.textContent = 'Add a working email.', $('email').focus());
+    if (choice.adult === 'no' && $('guardianName').value.trim().split(/\s+/).length < 2) return (err.textContent = "Add your parent or guardian's full name.", $('guardianName').focus());
+    if (choice.nil === 'yes' && !$('nilDetail').value.trim()) return (err.textContent = 'Tell us who the deal is with.', $('nilDetail').focus());
+    if (!$('agree').checked) return (err.textContent = 'Tick the box to agree to the terms.');
+    if (sig.toLowerCase().replace(/\s+/g, ' ') !== legal.toLowerCase().replace(/\s+/g, ' ')) return (err.textContent = 'Type your full legal name exactly as above to sign.', $('signature').focus());
+    var b = $('signBtn'); b.disabled = true; b.textContent = 'Signing...';
+    api('POST', {
+      action: 'consent', t: token, ua: navigator.userAgent, agree: true,
+      legalName: legal, artistName: $('artistName').value.trim(), email: $('email').value.trim(), instagram: $('instagram').value.trim(),
+      adult: choice.adult === 'yes', guardianName: $('guardianName').value.trim(), nilConflict: choice.nil, nilDetail: $('nilDetail').value.trim(),
+      signature: sig, songs: $('songsListed').value.split('\n').map(function (s) { return { title: s.trim() }; }).filter(function (s) { return s.title; })
+    }).then(function (r) {
+      if (!r.ok) throw r;
+      state.consent = true; render(); nextOpen();
+    }).catch(function () { err.textContent = "That didn't go through. Check your connection and tap Sign again."; })
+      .then(function () { b.disabled = false; b.textContent = 'Sign'; });
+  });
+
+  // STEP 3
+  var mode = 'file', file = null;
+  document.querySelectorAll('.tabs button').forEach(function (t) {
+    t.addEventListener('click', function () {
+      mode = t.dataset.mode;
+      document.querySelectorAll('.tabs button').forEach(function (x) { x.setAttribute('aria-selected', String(x === t)); });
+      show($('modeFile'), mode === 'file'); show($('modeLink'), mode === 'link'); $('e3').textContent = '';
+    });
+  });
+  $('fileIn').addEventListener('change', function () {
+    file = this.files[0] || null; $('e3').textContent = '';
+    if (!file) return;
+    if (file.size > MAX) { $('e3').textContent = 'That file is over 60 MB. Export it as an MP3, or use "Paste a link" instead.'; file = null; return; }
+    $('drop').classList.add('has'); $('dropTitle').textContent = file.name; $('dropSub').textContent = (file.size / 1048576).toFixed(1) + ' MB · tap to change';
+    if (!$('songTitle').value) $('songTitle').value = file.name.replace(/\.[^.]+$/, '');
+  });
+  function b64(blob) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(String(r.result).split(',')[1] || ''); }; r.onerror = rej; r.readAsDataURL(blob); }); }
+  function setBar(p) { $('bar').style.display = 'block'; $('barFill').style.width = Math.round(p * 100) + '%'; }
+  function postRetry(payload, tries) {
+    return api('POST', payload).then(function (r) { if (!r.ok && r.error === 'server_error' && tries > 0) return postRetry(payload, tries - 1); return r; },
+      function (e) { if (tries > 0) return new Promise(function (ok) { setTimeout(ok, 1500); }).then(function () { return postRetry(payload, tries - 1); }); throw e; });
+  }
+  async function uploadFile() {
+    var total = Math.max(1, Math.ceil(file.size / CHUNK));
+    var uploadId = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    for (var i = 0; i < total; i++) {
+      var data = await b64(file.slice(i * CHUNK, Math.min(file.size, (i + 1) * CHUNK)));
+      var r = await postRetry({ action: 'song_chunk', t: token, ua: navigator.userAgent, uploadId: uploadId, index: i, total: total, size: file.size, chunkSize: CHUNK, name: file.name, type: file.type || 'application/octet-stream', title: $('songTitle').value.trim(), data: data }, 2);
+      if (!r.ok) throw r;
+      setBar((i + 1) / total);
+    }
+  }
+  $('sendSong').addEventListener('click', async function () {
+    var b = this, err = $('e3'); err.textContent = '';
+    if (mode === 'file' && !file) return (err.textContent = 'Choose a song file first.');
+    var link = $('songLink').value.trim();
+    if (mode === 'link' && !/^https?:\/\/\S+\.\S+/.test(link)) return (err.textContent = 'Paste a full link that starts with https://');
+    b.disabled = true; b.textContent = mode === 'file' ? 'Uploading... keep this page open' : 'Sending...';
+    try {
+      if (mode === 'file') { setBar(0.02); await uploadFile(); }
+      else { var r = await api('POST', { action: 'song_link', t: token, ua: navigator.userAgent, url: link, title: $('songTitle').value.trim() }); if (!r.ok) throw r; }
+      state.song = true; render(); nextOpen();
+    } catch (e) {
+      err.textContent = e && e.error === 'too_big' ? 'That file is too big. Export it as an MP3 or paste a link instead.' : e && e.error === 'bad_link' ? "That link doesn't look right. Copy it again and paste it here." : "That didn't go through. Check your connection and try again.";
+    }
+    b.disabled = false; b.textContent = 'Send song'; $('bar').style.display = 'none';
+  });
+
+  // start
+  if (!token) { show($('loading'), false); show($('nolink'), true); return; }
+  api('GET', { action: 'lookup', t: token }).then(function (r) {
+    show($('loading'), false);
+    if (!r.ok) { show($('nolink'), true); return; }
+    me = r;
+    state.signup = !!(r.signup || r.signupSaid); state.consent = !!r.consent; state.song = !!(r.song || r.songOnFile);
+    $('hello').textContent = 'Hi ' + (r.artist || 'there');
+    $('emailShow').textContent = r.email || 'the email we contacted you at';
+    if (!r.email) $('copyEmail').classList.add('hidden');
+    $('artistName').value = r.artist || ''; $('email').value = r.email || '';
+    show($('app'), true); render(); nextOpen();
+  }).catch(function () {
+    show($('loading'), false); show($('nolink'), true);
+    document.querySelector('#nolink .sub').textContent = "We couldn't load your page just now. Check your connection and refresh.";
+  });
+})();
+</script>
+</body>
+</html>
